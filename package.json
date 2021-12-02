@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Andreas-Hum/Advent-of-code/issues"
   },
-  "homepage": "https://github.com/Andreas-Hum/Advent-of-code#readme"
+  "homepage": "https://github.com/Andreas-Hum/Advent-of-code#readme",
+  "dependencies": {
+    "node-fetch": "^3.1.0"
+  }
 }
