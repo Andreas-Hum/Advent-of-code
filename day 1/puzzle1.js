@@ -4,6 +4,7 @@ let answer = 0;
 
 
 
+
 for(let i = 0; i < depthData.length-1; i++){
         let temp = depthData[i];
 
