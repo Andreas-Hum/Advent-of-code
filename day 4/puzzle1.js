@@ -5,8 +5,13 @@ const readline = require('readline');
 let input = [];
 let numbers = [];
 let bingoBoard = [];
-let bingoSize = 4;
+let answerArray = [];
+let win = [];
 
+
+let sum = 0;
+
+let bingoBongo = false; 
 
 async function puzzle1(){
         const stream = fs.createReadStream("./input.txt");
@@ -21,8 +26,54 @@ async function puzzle1(){
 
         numbers = pickOrder(input.shift());
         bingoBoard = boardOrder(input);
+        let length = numbers.length;
+        let zeroArr = '00000';
+        loops();
 
-        console.log(bingoBoard[0])
+        function loops(){
+                for(let i = 0; i < length+1; i++){
+                        answerArray.push(numbers.shift())
+                        for(let j = 0; j < bingoBoard.length; j++){
+                                for(let k = 0; k < bingoBoard[j].length; k++){
+                                        for(let c = 0; c < bingoBoard[j][k].length; c++){
+                                                if(bingoBoard[j][k][c] == answerArray[i]){
+                                                        bingoBoard[j][k][c] = '0';
+                                                        if(bingo()){
+                                                                return;
+                                                        }
+        
+                                                }
+                                        }
+        
+                                }
+                        }
+                }
+        }
+        
+
+        
+        function bingo(){
+                for(let j = 0; j < bingoBoard.length; j++){
+                        for(let k = 0; k < bingoBoard[j].length; k++){
+                                if(bingoBoard[j][k].join("") == '00000' ){
+                                        console.log("BINGO")
+                                        win = bingoBoard[j];
+                                        return true;
+                                }
+
+                        }
+                }
+        }
+
+        let sumArr = win.slice(0,5);
+
+        const summer = (prev,cur) => Number(prev) + Number(cur);
+
+        for(let i = 0; i < sumArr.length; i++){
+                sum += sumArr[i].reduce(summer);
+        }
+        console.log(sum*Number(answerArray.pop()))
+
 
 }
 
